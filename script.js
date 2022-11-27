@@ -35,7 +35,7 @@ function playRound() {
     return `You both chose ${userInput}. This round is a tie.`
   } else if (winner === 'user win') {
     return `You chose ${userInput} and the computer chose ${computerChoice}. You win this round!`
-  } else if (winnner === 'computer win') {
+  } else if (winner === 'computer win') {
     return `You chose ${userInput} and the computer chose ${computerChoice}. The computer wins this round.`
   }
   }
