@@ -1,92 +1,47 @@
-let playerScore = 0;
-let computerScore = 0;
-let roundWinner = "";
+// Randomly generate a computer answer
 
-function computerPlay() {
-  let choiceNumber = Math.floor(Math.random() * 3);
-  switch (choiceNumber) {
-    case 0:
-      choice = "Rock";
-      break;
-    case 1:
-      choice = "Paper";
-      break;
-    case 2:
-      choice = "Scissors";
-      break;
-  }
-  return choice;
+function getComputerAnswer() {
+  const randonNumber = Math.floor(Math.random() * 3)
+    if (randonNumber === 0) {
+      return 'rock'
+    } else if (randonNumber === 1) {
+      return 'paper'
+    } else if (randonNumber === 2) {
+      return 'scissors'
+    }
 }
 
-function playRound(playerSelection, computerSelection) {
-  if (
-    playerSelection.toUpperCase() === "ROCK" &&
-    computerSelection.toUpperCase() === "SCISSORS"
-  ) {
-    roundWinner = "Player";
-    playerScore++;
-  } else if (
-    playerSelection.toUpperCase() === "PAPER" &&
-    computerSelection.toUpperCase() === "ROCK"
-  ) {
-    roundWinner = "Player";
-    playerScore++;
-  } else if (
-    playerSelection.toUpperCase() === "SCISSORS" &&
-    computerSelection.toUpperCase() === "PAPER"
-  ) {
-    roundWinner = "Player";
-    playerScore++;
-  } else if (
-    computerSelection.toUpperCase() === "ROCK" &&
-    playerSelection.toUpperCase() === "SCISSORS"
-  ) {
-    roundWinner = "Computer";
-    computerScore++;
-  } else if (
-    computerSelection.toUpperCase() === "PAPER" &&
-    playerSelection.toUpperCase() === "ROCK"
-  ) {
-    roundWinner = "Computer";
-    computerScore++;
-  } else if (
-    computerSelection.toUpperCase() === "SCISSORS" &&
-    playerSelection.toUpperCase() === "PAPER"
-  ) {
-    roundWinner = "Computer";
-    computerScore++;
-  } else {
-    roundWinner = "Draw";
-  }
-  updateScore();
+function getUserAnswer() {
+  return window.prompt('What is your guess?')
 }
 
-function updateScore() {
-  if (roundWinner === "Draw") {
-    console.log("It's a draw!");
-    console.log("Score = " + playerScore + ":" + computerScore);
-  } else if (roundWinner === "Player") {
-    console.log("You win!");
-    console.log("Score = " + playerScore + ":" + computerScore);
-  } else if (roundWinner === "Computer") {
-    console.log("Computer wins!");
-    console.log("Score = " + playerScore + ":" + computerScore);
-  }
+function getWinner(user, computer) {
+  if (user === computer) {
+    return 'tie'
+  } else if (user === 'rock' && computer === 'scissors') {
+    return 'user win'
+  } else if (user === 'paper' && computer === 'rock') {
+    return 'user win'
+  } else if (user === 'scissors' && computer === 'paper') {
+    return 'user win'
+  } else return 'computer win'
 }
 
-function game() {
-  for (i = 0; i < 5; i++) {
-    const playerSelection = prompt("Rock, paper, scissors?");
-    const computerSelection = computerPlay();
-    playRound(playerSelection, computerSelection);
+function playRound() {
+  const userInput = getUserAnswer()
+  const computerChoice = getComputerAnswer()
+  const winner = getWinner(userInput, computerChoice)
+  if (winner === 'tie') {
+    return `You both chose ${userInput}. This round is a tie.`
+  } else if (winner === 'user win') {
+    return `You chose ${userInput} and the computer chose ${computerChoice}. You win this round!`
+  } else if (winnner === 'computer win') {
+    return `You chose ${userInput} and the computer chose ${computerChoice}. The computer wins this round.`
   }
-  if (playerScore > computerScore) {
-    console.log("Player wins the game!")
-  } else if (playerScore < computerScore) {
-    console.log("Computer wins the game!")
-  } else {
-    console.log("The game is a draw!")
   }
-}
 
-game()
+  playRound()
+// Take a user input answer
+// Run the rules of rock paper scissors and add +1 to the score of the winner
+// Have the ability to start a new round
+// Track the cumulative scores across rounds
